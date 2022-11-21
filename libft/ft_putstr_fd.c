@@ -6,7 +6,7 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 07:35:53 by yfurutat          #+#    #+#             */
-/*   Updated: 2022/11/11 07:49:38 by yuske            ###   ########.fr       */
+/*   Updated: 2022/11/19 22:49:40 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@
 // 	ft_putstr_fd(s, fd);
 // }
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	size_t	len;
+// void	ft_putstr_fd(char *s, int fd)
+// {
+// 	size_t	len;
 
-	if (!s)
-		return ;
-	len = ft_strlen(s);
-	write(fd, s, len);
-}
+// 	if (!s)
+// 		return ;
+// 	len = ft_strlen(s);
+// 	write(fd, s, len);
+// }
 
 // void	ft_putstr_fd(char *s, int fd)
 // {
@@ -45,3 +45,15 @@ void	ft_putstr_fd(char *s, int fd)
 // 		i++;
 // 	}
 // }
+
+//7L
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (!s)
+		return ;
+	while (*s)
+	{
+		ft_putchar_fd(*s, fd);
+		s++;
+	}
+}

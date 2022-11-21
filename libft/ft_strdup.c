@@ -6,26 +6,29 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:57:13 by yfurutat          #+#    #+#             */
-/*   Updated: 2022/11/08 09:51:49 by yuske            ###   ########.fr       */
+/*   Updated: 2022/11/20 00:57:06 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+//16L
+char	*ft_strdup(const char *str)
 {
-	char			*ptr;
-	unsigned long	i;
+	char	*dup;
+	size_t	end;
+	size_t	i;
 
 	i = 0;
-	ptr = (char *)malloc(ft_strlen(s) + 1);
-	if (!ptr)
+	end = ft_strlen(str);
+	dup = (char *)malloc(end + 1);
+	if (!dup)
 		return (NULL);
-	while (i < ft_strlen(s))
+	while (i < end)
 	{
-		ptr[i] = s[i];
+		dup[i] = str[i];
 		i++;
 	}
-	ptr[i] = 0;
-	return (ptr);
+	dup[i] = '\0';
+	return (dup);
 }

@@ -6,11 +6,16 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 03:11:36 by yfurutat          #+#    #+#             */
-/*   Updated: 2022/11/08 15:15:39 by yuske            ###   ########.fr       */
+/*   Updated: 2022/11/17 20:29:06 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+// int	main()
+// {
+// 	printf("%zu", ft_strlen(""));
+// }
 
 size_t	ft_strlen(const char *str)
 {

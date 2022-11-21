@@ -6,80 +6,104 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:36:34 by yuske             #+#    #+#             */
-/*   Updated: 2022/11/11 07:57:17 by yuske            ###   ########.fr       */
+/*   Updated: 2022/11/20 16:33:52 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strndup(const char *s, size_t len)
+//11L
+static char	**free_f_all(char **words, size_t i)
 {
-	char	*buf;
-
-	buf = (char *)malloc(sizeof(char) * (len + 1));
-	if (!buf)
-		return (NULL);
-	ft_memcpy(buf, s, len);
-	buf[len] = '\0';
-	return (buf);
+	if (!words[i])
+	{
+		while (i > 0)
+		{
+			free(words[i]);
+			i--;
+		}
+		free(words);
+		words = NULL;
+	}
+	return (words);
 }
 
-static char	**re_processor(char const *s, char c, char **re)
+//8L
+//start->str=char*, end-start->len=size_t...automatically processed?
+static char	*ft_strndup(const char *str, size_t n)
+{
+	char	*dup;
+
+	dup = (char *)malloc(sizeof(char) * (n + 1));
+	if (!dup)
+		return (NULL);
+	ft_memcpy(dup, str, n);
+	dup[n] = '\0';
+	return (dup);
+}
+
+//23
+//protype line was too long
+static char	**word_processor(char const *str, char chr, char **words, size_t n)
 {
 	char const	*start;
 	char const	*end;
 	size_t		i;
 
 	i = 0;
-	while (*s)
+	while (*str && i != n)
 	{
-		if (*s != c)
+		if (*str != chr)
 		{
-			start = s;
-			while (*s != c && *s)
-				s++;
-			end = s;
-			re[i] = ft_strndup(start, end - start);
+			start = str;
+			while (*str != chr && *str)
+				str++;
+			end = str;
+			words[i] = ft_strndup(start, end - start);
+			if (!free_f_all(words, i))
+				break ;
 			i++;
 		}
 		else
-			s++;
+			str++;
 	}
-	re[i] = NULL;
-	return (re);
+	words[i] = NULL;
+	return (words);
 }
 
-static size_t	word_counter(const char *s, char c)
+//14L
+static size_t	word_counter(const char *str, char chr)
 {
-	size_t	word;
+	size_t	i;
 
-	word = 0;
-	while (*s)
+	i = 0;
+	while (*str)
 	{
-		if (*s != c)
+		if (*str != chr)
 		{
-			word++;
-			while (*s != c && *s)
-				s++;
+			i++;
+			while (*str != chr && *str)
+				str++;
 		}
-		s++;
+		str++;
 	}
-	return (word);
+	return (i);
 }
 
+//13L
 char	**ft_split(char const *s, char c)
 {
-	char	**re;
-	size_t	words;
+	char	**words;
+	size_t	n;
 
 	if (!s)
 		return (NULL);
-	words = word_counter(s, c);
-	re = malloc(sizeof(char *) * (words + 1));
-	if (!re)
+	n = word_counter(s, c);
+	words = malloc(sizeof(char *) * (n + 1));
+	if (!words)
 		return (NULL);
-	re = re_processor(s, c, re);
-	if (!re)
-		free(re);
-	return (re);
+	words = word_processor(s, c, words, n);
+	if (!words)
+		free(words);
+	return (words);
 }

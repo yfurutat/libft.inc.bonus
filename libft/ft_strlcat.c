@@ -6,7 +6,7 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 03:12:26 by yfurutat          #+#    #+#             */
-/*   Updated: 2022/11/07 11:48:04 by yuske            ###   ########.fr       */
+/*   Updated: 2022/11/19 11:57:38 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size_dst)
 	}
 	if (len_dst > size_dst)
 		len_dst = size_dst;
-	if (len_dst < size_dst)
+	else if (len_dst < size_dst)
 		dst[len_dst + i] = '\0';
 	return (len_dst + ft_strlen(src));
 }

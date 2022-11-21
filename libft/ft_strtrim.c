@@ -6,7 +6,7 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 20:35:51 by yuske             #+#    #+#             */
-/*   Updated: 2022/11/11 08:15:52 by yuske            ###   ########.fr       */
+/*   Updated: 2022/11/18 14:59:29 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*trimmed;
-	size_t	i;
-	size_t	end;
+	size_t	head;
+	size_t	tail;
 
 	if (!s1 || !set)
 		return (NULL);
-	i = 0;
-	end = ft_strlen(s1) - 1;
-	while (ft_strchr(set, s1[i]))
-		i++;
-	while (ft_strchr(set, s1[end]))
-		end--;
-	trimmed = ft_substr(s1, i, end - i + 1);
+	head = 0;
+	tail = ft_strlen(s1) - 1;
+	while (ft_strchr(set, s1[head]))
+		head++;
+	while (ft_strchr(set, s1[tail]))
+		tail--;
+	trimmed = ft_substr(s1, head, tail - head + 1);
 	return (trimmed);
 }
