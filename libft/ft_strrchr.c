@@ -6,7 +6,7 @@
 /*   By: yuske <yuske@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:18:01 by yfurutat          #+#    #+#             */
-/*   Updated: 2022/11/20 18:35:19 by yuske            ###   ########.fr       */
+/*   Updated: 2022/11/21 17:00:12 by yuske            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,35 +85,18 @@
 //ループでstrを終端まで送り、chが空文字なら終端ポインタを返す
 //後ろから遡り、chと一致する文字に当たるまでループ
 //最初まで遡っても見つからなければNULLを返す
-char	*ft_strrchr(const char *str, int ch)
-{
-	char	head;
-
-	if (!str)
-		SIGSEGV ;
-	head = *str;
-	while (*str)
-		str++;
-	if ((char)ch == '\0')
-		return ((char *)str);
-	while (*str != (char)ch)
-	{
-		if (*str == head)
-			return (NULL);
-		str--;
-	}
-	return ((char *)str);
-}
-
-//12L
 // char	*ft_strrchr(const char *str, int ch)
 // {
-// 	char head;
+// 	char	head;
 
+// 	if (!str)
+// 		SIGSEGV ;
 // 	head = *str;
 // 	while (*str)
 // 		str++;
-// 	while (*str != (const char)ch)
+// 	if ((char)ch == '\0')
+// 		return ((char *)str);
+// 	while (*str != (char)ch)
 // 	{
 // 		if (*str == head)
 // 			return (NULL);
@@ -122,7 +105,24 @@ char	*ft_strrchr(const char *str, int ch)
 // 	return ((char *)str);
 // }
 
-//5. 13L
+//5. 12L
+// char	*ft_strrchr(const char *str, int ch)
+// {
+// 	const char	*head;
+
+// 	head = str;
+// 	while (*str)
+// 		str++;
+// 	while (*str != (const char)ch)
+// 	{
+// 		if (str == head)
+// 			return (NULL);
+// 		str--;
+// 	}
+// 	return ((char *)str);
+// }
+
+//6. 13L
 //*strが空の文字列->rear==0
 //→whileループをスルー
 // char	*ft_strrchr(const char *str, int ch)
@@ -142,7 +142,7 @@ char	*ft_strrchr(const char *str, int ch)
 // 	return (NULL);
 // }
 
-//6. 12L
+//7. 12L
 //chが終端文字なら、whileループをスルー。
 //*strが空の文字列->rear==0
 //->while文の中に入るが、すぐにif文に当たる。->NULL
@@ -165,6 +165,7 @@ char	*ft_strrchr(const char *str, int ch)
 // 	return (&str_caster[rear]);
 // }
 
+//8. 12L
 // char	*ft_strrchr(const char *str, int ch)
 // {
 // 	char	*str_caster;
@@ -181,20 +182,20 @@ char	*ft_strrchr(const char *str, int ch)
 // 	return (str_caster);
 // }
 
-//10L
-// char	*ft_strrchr(const char *str, int ch)
-// {
-// 	size_t	rear;
+//9. 10L
+char	*ft_strrchr(const char *str, int ch)
+{
+	size_t	rear;
 
-// 	rear = ft_strlen(str);
-// 	while (str[rear] != (char)ch && rear >= 0)
-// 	{
-// 		if (rear == 0)
-// 			return (NULL);
-// 		rear--;
-// 	}
-// 	return ((char*)&str[rear]);
-// }
+	rear = ft_strlen(str);
+	while (str[rear] != (char)ch && rear >= 0)
+	{
+		if (rear == 0)
+			return (NULL);
+		rear--;
+	}
+	return ((char*)&str[rear]);
+}
 
 // //infinite loop
 // char	*ft_strrchr(const char *str, int ch)
